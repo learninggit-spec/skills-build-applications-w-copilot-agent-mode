@@ -2,6 +2,7 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
+import djongo.models.fields
 
 
 class Migration(migrations.Migration):
@@ -15,7 +16,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='User',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', djongo.models.fields.ObjectIdField(auto_created=True, db_column='_id', primary_key=True, serialize=False)),
                 ('username', models.CharField(max_length=150, unique=True)),
                 ('email', models.EmailField(max_length=254, unique=True)),
                 ('first_name', models.CharField(blank=True, max_length=30)),
@@ -26,7 +27,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Workout',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', djongo.models.fields.ObjectIdField(auto_created=True, db_column='_id', primary_key=True, serialize=False)),
                 ('name', models.CharField(max_length=100)),
                 ('description', models.TextField(blank=True)),
                 ('suggested_for', models.ManyToManyField(blank=True, related_name='suggested_workouts', to='tracker.user')),
@@ -35,7 +36,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Team',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', djongo.models.fields.ObjectIdField(auto_created=True, db_column='_id', primary_key=True, serialize=False)),
                 ('name', models.CharField(max_length=100, unique=True)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('members', models.ManyToManyField(related_name='teams', to='tracker.user')),
@@ -44,7 +45,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Leaderboard',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', djongo.models.fields.ObjectIdField(auto_created=True, db_column='_id', primary_key=True, serialize=False)),
                 ('total_points', models.PositiveIntegerField(default=0)),
                 ('last_updated', models.DateTimeField(auto_now=True)),
                 ('team', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='leaderboard', to='tracker.team')),
@@ -53,7 +54,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Activity',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', djongo.models.fields.ObjectIdField(auto_created=True, db_column='_id', primary_key=True, serialize=False)),
                 ('activity_type', models.CharField(max_length=50)),
                 ('duration', models.PositiveIntegerField(help_text='Duration in minutes')),
                 ('distance', models.FloatField(blank=True, help_text='Distance in kilometers', null=True)),
