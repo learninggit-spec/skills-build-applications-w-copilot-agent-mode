@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'octofit_tracker.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
+# Use the djongo backend to connect Django's ORM to MongoDB.
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
